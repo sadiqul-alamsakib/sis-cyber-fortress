@@ -2,6 +2,9 @@
 
 Enterprise-grade cybersecurity web platform and Central Super Admin Dashboard built with **Next.js 16 (App Router)**, **TypeScript**, **Tailwind CSS v4**, and **Supabase (PostgreSQL + Auth + RLS + Realtime)**.
 
+- **Live Deployment:** https://sis-cyber-fortress-ten.vercel.app
+- **Source Repository:** https://github.com/sadiqul-alamsakib/sis-cyber-fortress
+
 ## Integrated 12 Security Modules
 1. **01. SIS Identity Guardian** — Google OAuth, TOTP MFA enrollment, login activity log & privacy-preserving k-Anonymity SHA-1 breach check (`/api/modules/identity-breach`).
 2. **02. SIS Phishing Shield** — Live URL heuristics, IDN/punycode checks, DNS A-record resolution & Threat IOC correlation (`/api/modules/phishing-scan`).
