@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import { SisFortressEmblem } from '@/components/dashboard/SecurityIcons';
 import { SECURITY_MODULES } from '@/lib/modules/catalog';
 
 export default function HomePage() {
@@ -7,7 +6,12 @@ export default function HomePage() {
     <div className="min-h-screen bg-[#07080b] bg-tactical-grid text-zinc-100 flex flex-col">
       <header className="h-16 px-6 lg:px-12 border-b border-zinc-800/80 flex items-center justify-between bg-[#07080b]/85 backdrop-blur-md">
         <div className="flex items-center gap-3">
-          <SisFortressEmblem className="w-8 h-8" />
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/sis-logo.jpg"
+            alt="SIS Cyber Fortress"
+            className="w-12 h-8 object-cover rounded-md border border-amber-500/30"
+          />
           <span className="text-sm font-bold tracking-wider">
             SIS <span className="text-amber-400">CYBER FORTRESS</span>
           </span>
@@ -30,6 +34,14 @@ export default function HomePage() {
 
       <main className="flex-1 max-w-6xl w-full mx-auto px-6 py-14 space-y-12">
         <section className="text-center max-w-3xl mx-auto space-y-4">
+          <div className="flex justify-center">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/sis-logo.jpg"
+              alt="SIS Cyber Fortress Brand Logo"
+              className="w-56 h-32 object-cover rounded-2xl border border-amber-500/30 shadow-[0_0_40px_-12px_rgba(245,158,11,0.35)]"
+            />
+          </div>
           <span className="inline-block px-3 py-1 rounded-full text-[11px] font-mono font-semibold uppercase tracking-[0.2em] bg-amber-500/10 text-amber-300 border border-amber-500/25">
             12-in-1 Enterprise Cybersecurity Ecosystem
           </span>

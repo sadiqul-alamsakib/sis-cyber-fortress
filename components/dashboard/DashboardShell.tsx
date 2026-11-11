@@ -15,7 +15,6 @@ import {
   LogOutIcon,
   MenuIcon,
   ShieldAlertIcon,
-  SisFortressEmblem,
   TerminalIcon,
   UsersShieldIcon,
 } from './SecurityIcons';
@@ -110,7 +109,12 @@ export default function DashboardShell({
     <div className="flex flex-col h-full bg-[#090b0f] border-r border-zinc-800/80">
       <div className="flex items-center justify-between px-5 h-16 border-b border-zinc-800/80">
         <Link href="/dashboard" className="flex items-center gap-3">
-          <SisFortressEmblem className="w-9 h-9 shrink-0" />
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/sis-logo.jpg"
+            alt="SIS Cyber Fortress"
+            className="w-11 h-8 object-cover rounded-md border border-amber-500/30 shrink-0"
+          />
           <div className="leading-tight">
             <p className="text-sm font-bold tracking-wider text-zinc-100">
               SIS <span className="text-amber-400">CYBER</span>

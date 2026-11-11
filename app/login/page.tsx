@@ -2,7 +2,6 @@
 
 import { createClient } from '@/lib/supabase/client';
 import { useState } from 'react';
-import { SisFortressEmblem } from '@/components/dashboard/SecurityIcons';
 
 export default function LoginPage() {
   const [loading, setLoading] = useState(false);
@@ -35,8 +34,13 @@ export default function LoginPage() {
         <div className="absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-amber-400/60 to-transparent" />
 
         <div className="flex flex-col items-center text-center mb-8">
-          <div className="p-3 rounded-2xl bg-zinc-950 border border-amber-500/25 shadow-[0_0_30px_-8px_rgba(245,158,11,0.35)] mb-4">
-            <SisFortressEmblem className="w-12 h-12" />
+          <div className="p-1.5 rounded-2xl bg-[#04070d] border border-amber-500/30 shadow-[0_0_30px_-8px_rgba(245,158,11,0.35)] mb-4 overflow-hidden">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/sis-logo.jpg"
+              alt="SIS Cyber Fortress Logo"
+              className="w-48 h-28 object-cover rounded-xl"
+            />
           </div>
           <span className="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-semibold uppercase tracking-[0.22em] bg-amber-500/10 text-amber-300 border border-amber-500/25 mb-3">
             Zero-Trust Clearance
