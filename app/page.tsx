@@ -1,68 +1,68 @@
-import Image from "next/image";
+import Link from 'next/link';
+import { SisFortressEmblem } from '@/components/dashboard/SecurityIcons';
+import { SECURITY_MODULES } from '@/lib/modules/catalog';
 
-export default function Home() {
+export default function HomePage() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
+    <div className="min-h-screen bg-[#07080b] bg-tactical-grid text-zinc-100 flex flex-col">
+      <header className="h-16 px-6 lg:px-12 border-b border-zinc-800/80 flex items-center justify-between bg-[#07080b]/85 backdrop-blur-md">
+        <div className="flex items-center gap-3">
+          <SisFortressEmblem className="w-8 h-8" />
+          <span className="text-sm font-bold tracking-wider">
+            SIS <span className="text-amber-400">CYBER FORTRESS</span>
+          </span>
+        </div>
+        <div className="flex items-center gap-3">
+          <Link
+            href="/login"
+            className="px-4 py-1.5 rounded-lg text-xs font-semibold bg-amber-500/15 text-amber-300 border border-amber-500/30 hover:bg-amber-500/25 transition-colors"
+          >
+            Operator Sign In
+          </Link>
+          <Link
+            href="/dashboard"
+            className="px-4 py-1.5 rounded-lg text-xs font-semibold bg-zinc-100 text-zinc-950 hover:bg-amber-50 transition-colors"
+          >
+            Control Center →
+          </Link>
+        </div>
+      </header>
+
+      <main className="flex-1 max-w-6xl w-full mx-auto px-6 py-14 space-y-12">
+        <section className="text-center max-w-3xl mx-auto space-y-4">
+          <span className="inline-block px-3 py-1 rounded-full text-[11px] font-mono font-semibold uppercase tracking-[0.2em] bg-amber-500/10 text-amber-300 border border-amber-500/25">
+            12-in-1 Enterprise Cybersecurity Ecosystem
+          </span>
+          <h1 className="text-3xl sm:text-5xl font-bold tracking-tight text-zinc-100">
+            Unified Security Operations &amp; Zero-Trust Defense
           </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+          <p className="text-sm sm:text-base text-zinc-400">
+            Centralized Super Admin Control Center integrating 12 real-time cybersecurity modules with PostgreSQL Row Level Security, Zero-Knowledge AES-256-GCM Vaulting, and live TLS/DNS/IOC telemetry.
           </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
+          <div className="pt-2 flex items-center justify-center gap-4">
+            <Link
+              href="/login"
+              className="px-6 py-2.5 rounded-xl text-sm font-semibold bg-amber-400 text-zinc-950 hover:bg-amber-300 transition-colors"
+            >
+              Launch Command Center
+            </Link>
+          </div>
+        </section>
+
+        <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+          {SECURITY_MODULES.map((mod) => (
+            <div
+              key={mod.slug}
+              className="rounded-xl bg-[#0d0f14]/95 border border-zinc-800/90 p-4 space-y-1.5"
+            >
+              <span className="text-[10px] font-mono font-semibold text-amber-400">
+                MODULE {mod.code} • {mod.category}
+              </span>
+              <h2 className="text-sm font-semibold text-zinc-100">{mod.name}</h2>
+              <p className="text-xs text-zinc-400 line-clamp-2">{mod.summary}</p>
+            </div>
+          ))}
+        </section>
       </main>
     </div>
   );
