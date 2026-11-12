@@ -119,7 +119,7 @@ export default function DashboardShell({
           <img
             src="/sis-logo.jpg"
             alt="SIS Cyber Fortress"
-            className="w-11 h-8 object-cover rounded-md border border-amber-500/30 shrink-0"
+            className="w-12 h-8 object-contain bg-[#04070d] rounded-md border border-amber-500/35 shrink-0"
           />
           <div className="leading-tight">
             <p className="text-sm font-bold tracking-wider text-zinc-100">

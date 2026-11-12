@@ -10,7 +10,7 @@ export default function HomePage() {
           <img
             src="/sis-logo.jpg"
             alt="SIS Cyber Fortress"
-            className="w-12 h-8 object-cover rounded-md border border-amber-500/30"
+            className="w-14 h-9 object-contain bg-[#04070d] rounded-md border border-amber-500/35"
           />
           <span className="text-sm font-bold tracking-wider">
             SIS <span className="text-amber-400">CYBER FORTRESS</span>
