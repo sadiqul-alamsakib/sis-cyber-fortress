@@ -33,6 +33,20 @@ export default function UnifiedControlClient({
   );
   const [busyId, setBusyId] = useState<string | null>(null);
   const [statusBanner, setStatusBanner] = useState<string | null>(null);
+  const [tokenCopied, setTokenCopied] = useState(false);
+
+  const handleCopyMobileToken = async () => {
+    const { data } = await supabase.auth.getSession();
+    const token = data.session?.access_token;
+    if (!token) {
+      setStatusBanner('No active session token found. Please re-login on web first.');
+      return;
+    }
+    await navigator.clipboard.writeText(token);
+    setTokenCopied(true);
+    setStatusBanner('Operator Session Token copied! Paste it into "Connect via Operator Session Token" on your Android app.');
+    setTimeout(() => setTokenCopied(false), 3000);
+  };
 
   const androidAndNodes = useMemo(
     () => assets.filter((a) => a.asset_type !== 'website'),
@@ -197,6 +211,25 @@ export default function UnifiedControlClient({
           </button>
         </div>
       )}
+
+      {/* Mobile Pairing Helper (Useful when emulator lacks Google password) */}
+      <section className="rounded-xl bg-[#0d0f14] border border-amber-500/25 p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+        <div>
+          <p className="text-xs font-semibold text-amber-300">
+            Quick Android Emulator / MuMu Pairing
+          </p>
+          <p className="text-[11px] text-zinc-400">
+            If your emulator doesn&apos;t have your Google password signed in, copy your active session token and paste it in &ldquo;Connect via Operator Session Token&rdquo; on the Android app.
+          </p>
+        </div>
+        <button
+          type="button"
+          onClick={() => void handleCopyMobileToken()}
+          className="px-3.5 py-2 rounded-lg text-xs font-semibold bg-amber-500/15 text-amber-300 border border-amber-500/35 hover:bg-amber-500/25 shrink-0 cursor-pointer"
+        >
+          {tokenCopied ? 'Token Copied ✓' : 'Copy Mobile Session Token'}
+        </button>
+      </section>
 
       {/* Global Shared Security Policies (Web + Android) */}
       <section className="rounded-xl bg-[#0d0f14] border border-zinc-800 p-5 space-y-4">
