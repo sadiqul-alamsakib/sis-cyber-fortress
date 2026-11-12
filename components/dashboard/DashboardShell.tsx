@@ -62,6 +62,12 @@ export default function DashboardShell({
       exact: true,
     },
     {
+      href: '/dashboard/control',
+      label: 'App & Web Control',
+      icon: <ActivityIcon className="w-4 h-4" />,
+      exact: false,
+    },
+    {
       href: '/dashboard/modules',
       label: '12 Security Modules',
       icon: <ShieldAlertIcon className="w-4 h-4" />,

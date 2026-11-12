@@ -174,3 +174,37 @@ export interface AuditLogEntry {
   resource_id: string | null;
   details: Record<string, unknown>;
 }
+
+export type DeviceCommandType =
+  | 'SYNC_TELEMETRY'
+  | 'LOCK_VAULT'
+  | 'REVOKE_SESSION'
+  | 'PUSH_SECURITY_ALERT'
+  | 'RUN_NETWORK_CHECK'
+  | 'RUN_BACKUP_DRILL'
+  | 'RUN_WEBSHIELD_SCAN';
+
+export interface DeviceCommand {
+  id: string;
+  created_at: string;
+  updated_at: string;
+  asset_id: string;
+  target_platform: 'android' | 'web';
+  command_type: DeviceCommandType;
+  payload: Record<string, unknown>;
+  status: 'pending' | 'acknowledged' | 'executed' | 'failed';
+  issued_by: string | null;
+  executed_at: string | null;
+  result_message: string | null;
+}
+
+export interface SecurityPolicy {
+  id: string;
+  updated_at: string;
+  policy_key: string;
+  policy_name: string;
+  description: string;
+  scope: 'global' | 'android' | 'web';
+  enabled: boolean;
+  updated_by: string | null;
+}

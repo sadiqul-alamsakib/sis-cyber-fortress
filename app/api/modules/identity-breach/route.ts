@@ -2,8 +2,8 @@ import { NextResponse } from 'next/server';
 import { getAuthenticatedProfile } from '@/lib/auth/rbac';
 import { recordAuditLog } from '@/lib/audit';
 
-export async function GET() {
-  const { supabase, profile } = await getAuthenticatedProfile();
+export async function GET(request: Request) {
+  const { supabase, profile } = await getAuthenticatedProfile(request);
   if (!profile) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
@@ -22,7 +22,7 @@ export async function GET() {
 }
 
 export async function POST(request: Request) {
-  const { supabase, profile } = await getAuthenticatedProfile();
+  const { supabase, profile } = await getAuthenticatedProfile(request);
   if (!profile) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }

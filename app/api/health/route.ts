@@ -1,8 +1,8 @@
 import { NextResponse } from 'next/server';
 import { getAuthenticatedProfile } from '@/lib/auth/rbac';
 
-export async function GET() {
-  const { supabase, profile } = await getAuthenticatedProfile();
+export async function GET(request: Request) {
+  const { supabase, profile } = await getAuthenticatedProfile(request);
   if (!profile) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }

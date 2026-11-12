@@ -289,6 +289,42 @@ CREATE TABLE IF NOT EXISTS public.audit_logs (
   details JSONB NOT NULL DEFAULT '{}'::jsonb
 );
 
+-- 14. Interconnected Control Plane: Device Commands & Shared Security Policies
+CREATE TABLE IF NOT EXISTS public.device_commands (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+  updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+  asset_id UUID NOT NULL REFERENCES public.authorized_assets(id) ON DELETE CASCADE,
+  target_platform TEXT NOT NULL CHECK (target_platform IN ('android', 'web')),
+  command_type TEXT NOT NULL CHECK (
+    command_type IN (
+      'SYNC_TELEMETRY',
+      'LOCK_VAULT',
+      'REVOKE_SESSION',
+      'PUSH_SECURITY_ALERT',
+      'RUN_NETWORK_CHECK',
+      'RUN_BACKUP_DRILL',
+      'RUN_WEBSHIELD_SCAN'
+    )
+  ),
+  payload JSONB NOT NULL DEFAULT '{}'::jsonb,
+  status TEXT NOT NULL DEFAULT 'pending' CHECK (status IN ('pending', 'acknowledged', 'executed', 'failed')),
+  issued_by UUID REFERENCES public.profiles(id) ON DELETE SET NULL,
+  executed_at TIMESTAMPTZ,
+  result_message TEXT
+);
+
+CREATE TABLE IF NOT EXISTS public.security_policies (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+  policy_key TEXT NOT NULL UNIQUE,
+  policy_name TEXT NOT NULL,
+  description TEXT NOT NULL,
+  scope TEXT NOT NULL DEFAULT 'global' CHECK (scope IN ('global', 'android', 'web')),
+  enabled BOOLEAN NOT NULL DEFAULT TRUE,
+  updated_by UUID REFERENCES public.profiles(id) ON DELETE SET NULL
+);
+
 -- Enable Row Level Security (RLS) on all tables
 ALTER TABLE public.profiles ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.security_logs ENABLE ROW LEVEL SECURITY;
@@ -304,6 +340,8 @@ ALTER TABLE public.forensics_evidence ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.threat_iocs ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.soc_incidents ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.audit_logs ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.device_commands ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.security_policies ENABLE ROW LEVEL SECURITY;
 
 -- Enable Supabase Realtime on security_logs
 DO $$

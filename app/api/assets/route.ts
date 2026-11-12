@@ -6,8 +6,8 @@ const VALID_TYPES = ['website', 'android_device', 'server_node', 'network_ap'] a
 const VALID_ENVS = ['production', 'staging', 'lab'] as const;
 const VALID_COMPLIANCE = ['compliant', 'warning', 'non_compliant'] as const;
 
-export async function GET() {
-  const { supabase, profile } = await getAuthenticatedProfile();
+export async function GET(request: Request) {
+  const { supabase, profile } = await getAuthenticatedProfile(request);
   if (!profile) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
@@ -25,7 +25,7 @@ export async function GET() {
 }
 
 export async function POST(request: Request) {
-  const { supabase, profile } = await getAuthenticatedProfile();
+  const { supabase, profile } = await getAuthenticatedProfile(request);
   if (!profile) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
@@ -93,7 +93,7 @@ export async function POST(request: Request) {
 }
 
 export async function DELETE(request: Request) {
-  const { supabase, profile } = await getAuthenticatedProfile();
+  const { supabase, profile } = await getAuthenticatedProfile(request);
   if (!profile) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
